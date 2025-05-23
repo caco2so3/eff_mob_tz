@@ -1,0 +1,40 @@
+{% extends "ads/base.html" %}
+{% block title %}Объявления{% endblock %}
+{% block content %}
+<h1>Объявления</h1>
+<form method="get" class="mb-3">
+    <input type="text" name="q" placeholder="Поиск" value="{{ request.GET.q }}" class="form-control mb-2">
+
+    <select name="category" class="form-control mb-2">
+        <option value="">Любая категория</option>
+        <option value="спорт" {% if request.GET.category == 'спорт' %}selected{% endif %}>Спорт</option>
+        <option value="ремонт" {% if request.GET.category == 'ремонт' %}selected{% endif %}>Ремонт</option>
+        <option value="техника" {% if request.GET.category == 'техника' %}selected{% endif %}>Техника</option>
+        <option value="кухня" {% if request.GET.category == 'кухня' %}selected{% endif %}>Кухня</option>
+        <option value="автомобиль" {% if request.GET.category == 'автомобиль' %}selected{% endif %}>Автомобиль</option>
+        <option value="другое" {% if request.GET.category == 'другое' %}selected{% endif %}>Другое</option>
+    </select>
+
+    <select name="condition" class="form-control mb-2">
+        <option value="">Любое состояние</option>
+        <option value="new" {% if request.GET.condition == 'new' %}selected{% endif %}>Новый</option>
+        <option value="used" {% if request.GET.condition == 'used' %}selected{% endif %}>Б/У</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Фильтровать</button>
+    <a href="{% url 'ads:ad_list' %}" class="btn btn-secondary ms-2">Сбросить</a>
+</form>
+
+
+{% for ad in ads %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ ad.title }}</h5>
+        <p class="card-text">{{ ad.description|truncatewords:25 }}</p>
+        <a href="{% url 'ads:ad_detail' ad.pk %}" class="btn btn-outline-secondary">Подробнее</a>
+    </div>
+</div>
+{% empty %}
+<p>Объявлений не найдено.</p>
+{% endfor %}
+{% endblock %}

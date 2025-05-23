@@ -1,0 +1,27 @@
+{% extends "ads/base.html" %}
+{% block title %}Список предложений{% endblock %}
+{% block content %}
+<h2>Все предложения обмена</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>От</th>
+            <th>Кому</th>
+            <th>Комментарий</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for proposal in proposals %}
+        <tr>
+            <td>{{ proposal.id }}</td>
+            <td>{{ proposal.ad_sender }}</td>
+            <td>{{ proposal.ad_receiver }}</td>
+            <td>{{ proposal.comment }}</td>
+            <td>{{ proposal.get_status_display }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
