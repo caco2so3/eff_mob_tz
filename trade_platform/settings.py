@@ -54,7 +54,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'trade_tz',
         'USER': 'postgres',
-        'PASSWORD': 'grek1488',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5433',
     }
